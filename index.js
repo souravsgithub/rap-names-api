@@ -1,6 +1,9 @@
 const express = require("express");
+const cors = require("cors");
 const app = express();
 const PORT = 5000;
+
+app.use(cors());
 
 const rappers = {
   "21 savage": {
@@ -29,7 +32,7 @@ app.get("/api/:name", (req, res) => {
   if (rappers[rapperName]) {
     res.json(rappers[rapperName]);
   } else {
-    res.send("No rapper found with that name");
+    res.json({ age: 0, birthName: "Unknown", birthLocation: "Unknown" });
   }
 });
 
