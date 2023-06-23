@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+   <h1>Current Rappers</h1> 
+   <ul class="rappers">
+   <% for(let i = 0; i < info.length; i++) {%>
+    <li>    
+    <span><%= info[i].stageName %></span>
+    <span><%= info[i].birthName %></span>
+    <span><%= info[i].age %></span>
+    </li>
+    <% } %>
+   </ul>
+   <form action="/form" method="post">
+    <input type="text" placeholder="Stage Name" name="stageName">
+    <input type="text" placeholder="Birth Name" name="birthName">
+    <input type="number" placeholder="age" name="age">
+    <button type="submit">Submit</button>
+   </form>
+</body>
+</html>
