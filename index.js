@@ -3,18 +3,22 @@ const cors = require("cors");
 const app = express();
 const PORT = 5000;
 const MongoClient = require("mongodb").MongoClient;
+require("dotenv").config();
 
-MongoClient.connect(
-  "mongodb+srv://souravsemail2001:mymongo@cluster0.ojwz25g.mongodb.net/?retryWrites=true&w=majority"
-)
+MongoClient.connect(process.env.DB_STRING)
   .then((client) => {
     app.set("view-engine", "ejs");
+
     app.use(cors());
     app.use(express.json());
     app.use(express.urlencoded());
+    app.use(express.static("public"));
+
     console.log("Connected to the database!");
+
     const db = client.db("rappers-names-app");
     const rappers = db.collection("rappers");
+
     app.get("/", (req, res) => {
       rappers
         .find()
@@ -26,6 +30,7 @@ MongoClient.connect(
           console.error(err);
         });
     });
+
     app.post("/form", (req, res) => {
       rappers
         .insertOne(req.body)
