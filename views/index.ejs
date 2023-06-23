@@ -13,14 +13,14 @@
     <li>    
     <span><%= info[i].stageName %></span>
     <span><%= info[i].birthName %></span>
-    <span><%= info[i].age %></span>
+    <img src="/img/like.png" alt="like-icon" class="like">
+    <img src="/img/trash.png" alt="bin-icon" class="trash">
     </li>
     <% } %>
    </ul>
    <form action="/form" method="post">
     <input type="text" placeholder="Stage Name" name="stageName">
     <input type="text" placeholder="Birth Name" name="birthName">
-    <input type="number" placeholder="age" name="age">
     <button type="submit">Submit</button>
    </form>
    <script src="/js/main.js"></script>
