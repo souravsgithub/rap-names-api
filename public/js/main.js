@@ -14,9 +14,9 @@ Array.from(deleteBtns).forEach((deleteBtn) => {
 // }
 
 async function deleteRapper(e) {
-  sName = e.target.parentNode.children[0].textContent;
-  bName = e.target.parentNode.children[1].textContent;
-  console.log(sName, bName);
+  stageName = e.target.parentNode.children[0].textContent;
+  birthName = e.target.parentNode.children[1].textContent;
+  //   console.log(sName, bName);
   try {
     const response = await fetch("deleteRapper", {
       method: "delete",
@@ -24,8 +24,8 @@ async function deleteRapper(e) {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        stageName: sName,
-        birthName: bName,
+        stageName,
+        birthName,
       }),
     });
     const data = response.json();
