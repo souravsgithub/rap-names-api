@@ -22,7 +22,7 @@ MongoClient.connect(process.env.DB_STRING)
     app.get("/", (req, res) => {
       rappers
         .find()
-        .sort({ likes: 1 })
+        .sort({ likes: -1 })
         .toArray()
         .then((results) => {
           res.render("index.ejs", { info: results });
@@ -56,6 +56,7 @@ MongoClient.connect(process.env.DB_STRING)
         .deleteOne({
           stageName: req.body.stageName,
           birthName: req.body.birthName,
+          likes: req.body.likes,
         })
         .then((data) => {
           console.log(data);
@@ -63,6 +64,25 @@ MongoClient.connect(process.env.DB_STRING)
         })
         .catch((err) => {
           console.log(err);
+        });
+    });
+
+    app.put("/likeRapper", (req, res) => {
+      rappers
+        .findOneAndUpdate(
+          {
+            stageName: req.body.stageName,
+            birthName: req.body.birthName,
+            likes: req.body.likes,
+          },
+          { $inc: { likes: 1 } }
+        )
+        .then((data) => {
+          console.log(data);
+          res.json("Liked the rapper");
+        })
+        .catch((err) => {
+          console.error(err);
         });
     });
 
