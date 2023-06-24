@@ -11,7 +11,7 @@ MongoClient.connect(process.env.DB_STRING)
 
     app.use(cors());
     app.use(express.json());
-    app.use(express.urlencoded());
+    app.use(express.urlencoded({ urlencoded: true }));
     app.use(express.static("public"));
 
     console.log("Connected to the database!");
@@ -22,6 +22,7 @@ MongoClient.connect(process.env.DB_STRING)
     app.get("/", (req, res) => {
       rappers
         .find()
+        .sort({ likes: 1 })
         .toArray()
         .then((results) => {
           res.render("index.ejs", { info: results });
@@ -31,7 +32,7 @@ MongoClient.connect(process.env.DB_STRING)
         });
     });
 
-    app.post("/form", (req, res) => {
+    app.post("/addRapper", (req, res) => {
       console.log(req.body);
       rappers
         .insertOne({
@@ -47,6 +48,21 @@ MongoClient.connect(process.env.DB_STRING)
         })
         .catch((err) => {
           console.error(err);
+        });
+    });
+
+    app.delete("/deleteRapper", (req, res) => {
+      rappers
+        .deleteOne({
+          stageName: req.body.stageName,
+          birthName: req.body.birthName,
+        })
+        .then((data) => {
+          console.log(data);
+          res.json("The rapper is deleted successfully!");
+        })
+        .catch((err) => {
+          console.log(err);
         });
     });
 
