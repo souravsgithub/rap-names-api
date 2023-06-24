@@ -32,13 +32,21 @@ MongoClient.connect(process.env.DB_STRING)
     });
 
     app.post("/form", (req, res) => {
+      console.log(req.body);
       rappers
-        .insertOne(req.body)
+        .insertOne({
+          stageName: req.body.stageName,
+          birthName: req.body.birthName,
+          likes: 0,
+        })
         .then((result) => {
           console.log(result);
         })
         .then(() => {
           res.redirect("/");
+        })
+        .catch((err) => {
+          console.error(err);
         });
     });
 
