@@ -1,42 +1,11 @@
 h1 {
     color: red;
 }
-ul {
-    padding-left: 0;
-    min-width: 25%;
-}
-ul img {
-    cursor: pointer;
-    display: flex;
-    justify-content: center;
-}
-li {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    text-align: center;
-}
-li > p {
-    width: 7rem;
-    margin: 0.5rem 0rem;
-}
 .trash, .like {
     width: 25px;
     height: 25px;
+    margin-top: 0.5rem;
 }
-
-@media (min-width: 420px) {
-    ul {
-        max-width: 50%;
-    }
-}
-@media (min-width: 720px) {
-    ul {
-        max-width: 40%;
-    }
-}
-@media (min-width: 900px) {
-    ul {
-        max-width: 30%;
-    }
+.likesNum {
+    margin-left: 0.8rem;
 }

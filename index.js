@@ -11,7 +11,7 @@ MongoClient.connect(process.env.DB_STRING)
 
     app.use(cors());
     app.use(express.json());
-    app.use(express.urlencoded({ urlencoded: true }));
+    app.use(express.urlencoded({ extended: true }));
     app.use(express.static("public"));
 
     console.log("Connected to the database!");
@@ -41,9 +41,6 @@ MongoClient.connect(process.env.DB_STRING)
           likes: 0,
         })
         .then((result) => {
-          console.log(result);
-        })
-        .then(() => {
           res.redirect("/");
         })
         .catch((err) => {
@@ -59,7 +56,6 @@ MongoClient.connect(process.env.DB_STRING)
           likes: req.body.likes,
         })
         .then((data) => {
-          console.log(data);
           res.json("The rapper is deleted successfully!");
         })
         .catch((err) => {
@@ -78,7 +74,6 @@ MongoClient.connect(process.env.DB_STRING)
           { $inc: { likes: 1 } }
         )
         .then((data) => {
-          console.log(data);
           res.json("Liked the rapper");
         })
         .catch((err) => {
